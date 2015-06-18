@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Smart Pay</string>
+    <string name="accounts">Accounts</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="transactions">Transactions</string>
+    <string name="logout">Log out</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="page_refresh">Refresh</string>
+    <string name="lock_application">Lock Smart Pay</string>
+    <string name="balanceAmount">Balance :$25</string>
+    <string name="addmoney">Add Money</string>
+    <string name="payNow">Pay Now</string>
+
+</resources>
