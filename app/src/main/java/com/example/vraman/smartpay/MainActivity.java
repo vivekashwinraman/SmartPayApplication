@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import fragments.AccountsFragment;
 import fragments.NavigationDrawerFragment;
 import fragments.AddPayFragment;
+import fragments.SettingsFragment;
 import fragments.TransactionsFragment;
 import modelObjects.AccountObject;
+import modelObjects.SettingsObject;
 import modelObjects.TransactionObject;
 
 
@@ -72,9 +74,12 @@ public class MainActivity extends ActionBarActivity
                         .replace(R.id.container, TransactionsFragment.newInstance(position + 1, transactionObjectList))
                         .commit();
                 break;
-            default:
+            case 3:
+                ArrayList<SettingsObject> settingsObjectList = new ArrayList<SettingsObject>();
+                settingsObjectList.add(new SettingsObject("Smart Pay PIN",""));
+                settingsObjectList.add(new SettingsObject("Smart Pay Status", "30"));
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, AddPayFragment.newInstance(position + 1))
+                        .replace(R.id.container, SettingsFragment.newInstance(position + 1,settingsObjectList))
                         .commit();
                 break;
 
@@ -93,7 +98,7 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.transactions);
                 break;
             case 4:
-                mTitle = getString(R.string.logout);
+                mTitle = getString(R.string.settings);
         }
     }
 
