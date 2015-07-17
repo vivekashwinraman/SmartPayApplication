@@ -29,6 +29,7 @@ import java.util.List;
 
 import asyncTasks.UserLoginTask;
 import interfaces.LoginListener;
+import managers.SessionManager;
 
 /**
  * A login screen that offers login via email/password.
@@ -220,6 +221,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         int IS_PRIMARY = 1;
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
@@ -237,7 +243,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         finish();
     }
 
-    private void login(String email, String password) {
+    private void login(final String email, String password) {
 
         new UserLoginTask(email, password,
                 new LoginListener() {
@@ -245,7 +251,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     @Override
                     public void onLoginSuccess(boolean success) {
                         if (success) {
+                            new SessionManager(getApplicationContext()).createUserLoginSession(email.split("@")[0],email);
                             callMainActivity();
+
                         } else {
                             showProgress(false);
                             mPasswordView.setError(getString(R.string.error_incorrect_password));
