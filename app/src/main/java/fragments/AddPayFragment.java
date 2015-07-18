@@ -4,9 +4,18 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.vraman.smartpay.MainActivity;
 import com.example.vraman.smartpay.R;
@@ -31,6 +40,15 @@ public class AddPayFragment extends android.support.v4.app.Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private Button addPayMain;
+    private RelativeLayout addMoneyLayout;
+    private RelativeLayout addMoneyOverlayLayout;
+    private EditText enterAmount;
+    private TextView totalAmount;
+    private TextView balance;
+    private Button clear;
+    private Button add;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -54,14 +72,89 @@ public class AddPayFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_addpay, container, false);
+        View layout = inflater.inflate(R.layout.fragment_addpay, container, false);
+        addMoneyLayout = (RelativeLayout) layout.findViewById(R.id.add_money_layout);
+        addMoneyOverlayLayout = (RelativeLayout) layout.findViewById(R.id.add_money_overlay);
+        addPayMain = (Button) layout.findViewById(R.id.addMoney);
+        enterAmount = (EditText) layout.findViewById(R.id.money_amount);
+        addPayMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addMoneyLayout.setVisibility(View.GONE);
+                addMoneyOverlayLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
+        enterAmount.addTextChangedListener(amountWatcher);
+        totalAmount = (TextView) layout.findViewById(R.id.total_money);
+        balance = (TextView) layout.findViewById(R.id.balanceAmount);
+
+       clear = (Button) layout.findViewById(R.id.cancel);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterAmount.setText("");
+                totalAmount.setText("");
+            }
+        });
+
+        add = (Button) layout.findViewById(R.id.add_done);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addMoneyLayout.setVisibility(View.VISIBLE);
+                addMoneyOverlayLayout.setVisibility(View.GONE);
+                enterAmount.setText("");
+                totalAmount.setText("");
+                try {
+                    double remBalance = Double.parseDouble(balance.getText().toString().substring(1));
+                    double balanceNew = remBalance + Double.parseDouble(totalAmount.getText().toString().substring(1));
+                    Log.d("HERE: ", remBalance +" "+balanceNew);
+                    balance.setText("$" + balanceNew);
+                } catch(NumberFormatException e){
+
+                }
+            }
+        });
+
+
+
+        return layout;
     }
+
+
+    private final TextWatcher amountWatcher = new TextWatcher() {
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        public void afterTextChanged(Editable s) {
+            if (s.length() == 0) {
+                totalAmount.setText(""+0.0);
+            } else{
+                double total = 0.0;
+                try {
+
+                    double  fee = (Double.parseDouble(enterAmount.getText().toString())) * (0.029);
+                    total += fee;
+                } catch(NumberFormatException e){
+
+                }
+                totalAmount.setText("$"+total);
+            }
+        }
+    };
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

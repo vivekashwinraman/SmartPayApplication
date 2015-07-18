@@ -3,10 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fragments.SettingsFragment">
-
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:id="@+id/add_money_layout"
+        >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/top_layout"
+        android:background="@color/green"
+        android:layout_gravity="center|top"
+        android:paddingTop="30dp"
+>
 
         <TextView
             android:id="@+id/balanceAmount"
@@ -16,23 +26,130 @@
             android:textSize="30sp"
             android:layout_centerHorizontal="true"
             android:paddingBottom="20px"
-           />
+            />
 
-        <Button
-            android:id="@+id/addMoney"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_below="@+id/balanceAmount"
-            android:text="@string/addmoney"
-            android:textColor="@color/green"/>
+            android:layout_marginBottom="40dp"
+            android:padding="20dp"
+            >
 
-        <Button
-            android:id="@+id/payNow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/addMoney"
-            android:layout_below="@+id/balanceAmount"
-            android:text="@string/payNow"
-            android:textColor="@color/green"/>
+            <Button
+                android:id="@+id/addMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/addmoney"
+                android:layout_marginRight="40dp"
+                android:background="@color/white"
+                android:textColor="@color/green"/>
+
+            <Button
+                android:id="@+id/payNow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/addMoney"
+                android:text="@string/payNow"
+                android:background="@color/white"
+                android:textColor="@color/green"/>
+        </RelativeLayout>
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/low_balance"
+        android:drawableLeft="@drawable/ic_launcher"
+        android:layout_below="@id/top_layout"
+        android:padding="15dp"
+        android:text="@string/low_balance"
+        android:drawablePadding="20dp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/add_money_overlay"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Money"
+            android:gravity="left"
+            android:id="@+id/add_money_title"
+            android:padding="10dp"
+            android:background="@color/green"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Credit card Details"
+            android:gravity="left"
+            android:id="@+id/card_detail"
+            android:padding="10dp"
+            android:layout_below="@id/add_money_title"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="$0.00"
+            android:gravity="left"
+            android:id="@+id/money_amount"
+            android:padding="30dp"
+            android:textSize="30dp"
+            android:layout_below="@id/card_detail"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.9%"
+            android:gravity="left"
+            android:id="@+id/fee_detail"
+            android:paddingLeft="30dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@id/money_amount"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total"
+            android:gravity="left"
+            android:id="@+id/total_money"
+            android:padding="30dp"
+            android:textSize="20dp"
+            android:layout_below="@id/fee_detail"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/total_money"
+            android:layout_marginBottom="20dp"
+            >
+
+            <Button
+                android:id="@+id/add_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/all_ok"
+                android:layout_marginRight="40dp"
+                android:textColor="@color/green_light"/>
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/add_done"
+                android:text="@string/lemme_try_again"
+                android:textColor="@color/green_light"/>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
 </FrameLayout>
