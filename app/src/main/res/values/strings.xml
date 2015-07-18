@@ -14,5 +14,8 @@
     <string name="balanceAmount">Balance :$25</string>
     <string name="addmoney">Add Money</string>
     <string name="payNow">Pay Now</string>
+    <string name="low_balance">Low Balance alert. \n Set low balance alert</string>
+    <string name="lemme_try_again">Let me try again</string>
+    <string name="all_ok">ALL DONE!</string>
 
 </resources>
