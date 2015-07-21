@@ -2,24 +2,15 @@ package com.example.vraman.smartpay;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
-import java.util.ArrayList;
-
-import fragments.AccountsFragment;
-import fragments.AddPayFragment;
 import fragments.NavigationDrawerFragment;
-import fragments.SettingsFragment;
-import fragments.TransactionsFragment;
 import managers.SessionManager;
-import modelObjects.AccountObject;
-import modelObjects.SettingsObject;
-import modelObjects.TransactionObject;
 
 
 public class MainActivity extends ActionBarActivity
@@ -28,71 +19,66 @@ public class MainActivity extends ActionBarActivity
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    protected NavigationDrawerFragment mNavigationDrawerFragment;
+    protected int navDrawerIcon = R.drawable.smartpay_24x24;
+    protected FrameLayout frameLayout;
+    protected ActionBar actionBar;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
 
-    private SessionManager sessionManager;
+    protected SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        frameLayout = (FrameLayout) findViewById(R.id.container);
+        actionBar = getSupportActionBar();
         sessionManager = new SessionManager(getApplicationContext());
         if (!sessionManager.isLoggedIn()) {
             callLoginActivity();
         }
 
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout), sessionManager.getUserSessionObject().getUserEmail());
+                (DrawerLayout) findViewById(R.id.drawer_layout), sessionManager.getUserSessionObject().getUserEmail(), navDrawerIcon);
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        Intent intent = null;
         switch (position) {
             case 1:
-                ArrayList<AccountObject> accountObjectList = new ArrayList<AccountObject>();
-                accountObjectList.add(new AccountObject("Test Account 1", "1"));
-                accountObjectList.add(new AccountObject("Test Account 2", "1"));
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, AccountsFragment.newInstance(position + 1, accountObjectList))
-                        .commit();
+                intent = new Intent(this, AccountsActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case 2:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, AddPayFragment.newInstance(position + 1))
-                        .commit();
+                intent = new Intent(this, AddPayActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case 3:
-                ArrayList<TransactionObject> transactionObjectList = new ArrayList<TransactionObject>();
-                transactionObjectList.add(new TransactionObject("Transaction 1", "20", "Account 1", ""));
-                transactionObjectList.add(new TransactionObject("Transaction 2", "30", "Account 2", ""));
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, TransactionsFragment.newInstance(position + 1, transactionObjectList))
-                        .commit();
+                intent = new Intent(this, TransactionActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case 4:
-                ArrayList<SettingsObject> settingsObjectList = new ArrayList<SettingsObject>();
-                settingsObjectList.add(new SettingsObject("Smart Pay PIN", ""));
-                settingsObjectList.add(new SettingsObject("Smart Pay Status", "30"));
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, SettingsFragment.newInstance(position + 1, settingsObjectList))
-                        .commit();
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case 5:
                 sessionManager.logOutUser();
                 callLoginActivity();
+                break;
+            default:
                 break;
 
         }
@@ -118,9 +104,8 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(mTitle);
     }
 
@@ -149,11 +134,18 @@ public class MainActivity extends ActionBarActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    protected void callMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        this.finish();
+    }
+
     private void callLoginActivity() {
+
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
