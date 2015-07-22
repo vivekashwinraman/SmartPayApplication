@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import databaseObjects.SmartPinDataObject;
-
 /**
  * Created by vraman on 7/19/15.
  */
