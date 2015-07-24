@@ -57,7 +57,7 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
-    private int mCurrentSelectedPosition = 0;
+    private int mCurrentSelectedPosition;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
@@ -103,7 +103,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    selectItem(position);
+                selectItem(position);
 
             }
         });
@@ -112,8 +112,8 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 new String[]{
+                        getString(R.string.app_name),
                         getString(R.string.accounts),
-                        getString(R.string.pay_now),
                         getString(R.string.transactions),
                         getString(R.string.settings),
                         getString(R.string.logout)
@@ -132,10 +132,11 @@ public class NavigationDrawerFragment extends Fragment {
      * @param fragmentId   The android:id of this fragment in its activity's layout.
      * @param drawerLayout The DrawerLayout containing this fragment's UI.
      */
-    public void setUp(int fragmentId, DrawerLayout drawerLayout, String userEmail, int icon) {
+    public void setUp(int fragmentId, DrawerLayout drawerLayout, String userEmail, int icon, int currentPosition) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         userName.setText(userEmail);
+        mCurrentSelectedPosition = currentPosition;
 
 
         // set a custom shadow that overlays the main content when the drawer opens
@@ -200,6 +201,7 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        setChecked(currentPosition);
     }
 
     private void selectItem(int position) {
@@ -212,6 +214,12 @@ public class NavigationDrawerFragment extends Fragment {
         }
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
+        }
+    }
+
+    private void setChecked(int position) {
+        if (mDrawerListView != null) {
+            mDrawerListView.setItemChecked(position, true);
         }
     }
 

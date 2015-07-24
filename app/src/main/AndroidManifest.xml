@@ -2,14 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.vraman.smartpay" >
 
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="15" />
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="15" />
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -26,21 +34,22 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_secure_pin"></activity>
+            android:label="@string/settings" />
         <activity
             android:name=".AccountsActivity"
-            android:label="@string/title_activity_accounts"></activity>
+            android:label="@string/title_activity_accounts" />
         <activity
             android:name=".TransactionActivity"
-            android:label="@string/title_activity_transaction"></activity>
+            android:label="@string/title_activity_transaction" />
         <activity
-            android:name=".AddPayActivity"
-            android:label="@string/title_activity_add_pay">
+            android:name=".BaseActivity"
+            android:label="@string/app_name">
         </activity>
     </application>
 

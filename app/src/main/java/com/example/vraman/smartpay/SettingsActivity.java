@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import adapters.SettingsAdapter;
 import modelObjects.SettingsObject;
 
-public class SettingsActivity extends MainActivity {
+public class SettingsActivity extends BaseActivity {
 
     private SettingsAdapter settingsAdapter;
     private ListView mainListView;

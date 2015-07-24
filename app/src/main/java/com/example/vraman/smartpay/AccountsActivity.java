@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import adapters.AccountAdapter;
 import modelObjects.AccountObject;
 
-public class AccountsActivity extends MainActivity {
+public class AccountsActivity extends BaseActivity {
 
     private AccountAdapter accountAdapter;
     private ListView mainListView;

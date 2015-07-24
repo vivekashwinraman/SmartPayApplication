@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import adapters.TransactionAdapter;
 import modelObjects.TransactionObject;
 
-public class TransactionActivity extends MainActivity {
+public class TransactionActivity extends BaseActivity {
 
     private TransactionAdapter transactionAdapter;
     private ListView mainListView;
