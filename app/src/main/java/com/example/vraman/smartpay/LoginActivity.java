@@ -238,7 +238,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
 
     private void callMainActivity() {
-        Intent intent = new Intent(this, BaseActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
