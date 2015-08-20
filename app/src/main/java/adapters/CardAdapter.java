@@ -1,8 +1,5 @@
 package adapters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +8,23 @@ import android.widget.TextView;
 
 import com.example.vraman.smartpay.R;
 
-import modelObjects.AccountObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import modelObjects.CardObject;
 
 /**
  * Created by vraman on 5/29/15.
  */
-public class AccountAdapter extends ArrayAdapter<AccountObject> {
+public class CardAdapter extends ArrayAdapter<CardObject> {
 
-    private final List<AccountObject> accountNames;
-    private TextView accountName;
+    private final List<CardObject> cards;
+    private TextView cardName;
 
-    public AccountAdapter(Context _context, int layout, int textView_id,
-                            ArrayList<AccountObject> list) {
+    public CardAdapter(Context _context, int layout, int textView_id,
+                       ArrayList<CardObject> list) {
         super(_context, layout, textView_id, list);
-        accountNames = list;
+        cards = list;
     }
 
     public static class ViewHolder {
@@ -35,21 +35,21 @@ public class AccountAdapter extends ArrayAdapter<AccountObject> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View superView = super.getView(position, convertView, parent);
-        accountName = (TextView) superView.findViewById(R.id.row_text);
-        accountName.setText(accountNames.get(position).getAccountName());
+        cardName = (TextView) superView.findViewById(R.id.row_text);
+        cardName.setText(cards.get(position).getCardName());
         return superView;
     }
 
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return accountNames.size();
+        return cards.size();
     }
 
     @Override
-    public AccountObject getItem(int position) {
+    public CardObject getItem(int position) {
         // TODO Auto-generated method stub
-        return accountNames.get(position);
+        return cards.get(position);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class AccountAdapter extends ArrayAdapter<AccountObject> {
         return 0;
     }
 
-    public List<AccountObject> getAccountNames() {
-        return accountNames;
+    public List<CardObject> getCards() {
+        return cards;
     }
 }

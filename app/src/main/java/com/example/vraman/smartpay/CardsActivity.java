@@ -10,29 +10,29 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import adapters.AccountAdapter;
-import modelObjects.AccountObject;
+import adapters.CardAdapter;
+import modelObjects.CardObject;
 
-public class AccountsActivity extends BaseActivity {
+public class CardsActivity extends BaseActivity {
 
-    private AccountAdapter accountAdapter;
+    private CardAdapter cardAdapter;
     private ListView mainListView;
 
-    private ArrayList<AccountObject> accountObjectList;
+    private ArrayList<CardObject> cardObjectList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getLayoutInflater().inflate(R.layout.activity_accounts, frameLayout);
+        getLayoutInflater().inflate(R.layout.activity_cards, frameLayout);
         mainListView = (ListView) frameLayout.findViewById(R.id.main_list);
-        accountObjectList = new ArrayList<AccountObject>();
-        accountObjectList.add(new AccountObject("Test Account 1", "1"));
-        accountObjectList.add(new AccountObject("Test Account 2", "1"));
-        accountAdapter = new AccountAdapter(this,
-                R.layout.main_list_row, R.id.row_text, accountObjectList);
+        cardObjectList = new ArrayList<CardObject>();
+        cardObjectList.add(new CardObject("Test Card 1", "1"));
+        cardObjectList.add(new CardObject("Test Card 2", "1"));
+        cardAdapter = new CardAdapter(this,
+                R.layout.main_list_row, R.id.row_text, cardObjectList);
 
         // Set the ArrayAdapter as the ListView's adapter.
-        mainListView.setAdapter(accountAdapter);
+        mainListView.setAdapter(cardAdapter);
         mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -56,7 +56,7 @@ public class AccountsActivity extends BaseActivity {
     @Override
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.accounts);
+        actionBar.setTitle(R.string.cards);
     }
 
     @Override

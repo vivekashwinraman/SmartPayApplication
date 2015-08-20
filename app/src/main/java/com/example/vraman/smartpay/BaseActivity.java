@@ -59,7 +59,7 @@ public class BaseActivity extends ActionBarActivity
                 intent = new Intent(this, MainActivity.class);
                 break;
             case 2:
-                intent = new Intent(this, AccountsActivity.class);
+                intent = new Intent(this, CardsActivity.class);
                 break;
             case 3:
                 intent = new Intent(this, TransactionActivity.class);
@@ -80,24 +80,6 @@ public class BaseActivity extends ActionBarActivity
         finish();
     }
 
-    protected void onSectionAttached(int number) {
-        switch (number) {
-            case 2:
-                mTitle = getString(R.string.app_name);
-                break;
-            case 3:
-                mTitle = getString(R.string.accounts);
-                break;
-            case 4:
-                mTitle = getString(R.string.transactions);
-                break;
-            case 5:
-                mTitle = getString(R.string.settings);
-                break;
-            case 6:
-                mTitle = getString(R.string.logout);
-        }
-    }
 
     public void restoreActionBar() {
         actionBar.setDisplayShowTitleEnabled(true);

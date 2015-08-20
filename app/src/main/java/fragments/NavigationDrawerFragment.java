@@ -113,7 +113,7 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.id.text1,
                 new String[]{
                         getString(R.string.app_name),
-                        getString(R.string.accounts),
+                        getString(R.string.cards),
                         getString(R.string.transactions),
                         getString(R.string.settings),
                         getString(R.string.logout)
@@ -146,6 +146,7 @@ public class NavigationDrawerFragment extends Fragment {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.

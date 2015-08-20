@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Smart Pay</string>
-    <string name="accounts">Accounts</string>
+    <string name="cards">Cards</string>
     <string name="logout">Log out</string>
     <string name="pay_now">Pay Now</string>
     <string name="transactions">Transactions</string>
